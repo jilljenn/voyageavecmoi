@@ -1,4 +1,5 @@
 import {combineReducers} from 'redux';
+import {INVALIDATE_OFFERS, REQUEST_OFFERS, RECEIVE_OFFERS} from 'actions/OffersActions';
 
 import offer from './OffersReducer.js';
 
@@ -7,9 +8,7 @@ function offers(state = {}, action) {
     case REQUEST_OFFERS:
     case RECEIVE_OFFERS:
     case INVALIDATE_OFFERS:
-      return _.assign({}, state, {
-        offers: offer(state.offer, action)
-      });
+      return offer(state.offer, action);
     default:
       return state;
   }

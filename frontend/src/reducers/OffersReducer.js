@@ -1,4 +1,4 @@
-import {REQUEST_OFFERS, RECEIVE_OFFERS} from 'actions/OffersActions';
+import {INVALIDATE_OFFERS, REQUEST_OFFERS, RECEIVE_OFFERS} from 'actions/OffersActions';
 import _ from 'lodash';
 
 export default function reduce(state = {
@@ -17,7 +17,7 @@ export default function reduce(state = {
         isFetching: false,
         didInvalidate: false,
         items: action.offers,
-        lastUpdated: actions.receivedAt
+        lastUpdated: action.receivedAt
       });
     case INVALIDATE_OFFERS:
       return _.assign({}, state, {
