@@ -35,6 +35,14 @@ oauth_token, oauth_secret = twitter.read_token_file(MY_TWITTER_CREDS)
 auth = twitter.OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)
 
 stream = twitter.TwitterStream(auth=auth)
-db = r.connect('localhost', 28015)
+try:
+    db = r.connect('localhost', 28015)
 
-fetch_tweets(db, stream)
+    list_db = r.db_list().run(db)
+    if 'voyageavecmoi' not in list_db:
+        raise RuntimeError('Il faut créer la DB voyageavecmoi avec le script create_database.py avant de lancer ce script!')
+
+    fetch_tweets(db, stream)
+except Exception as e:
+    print ('Une erreur est survenue!')
+    print (e)
