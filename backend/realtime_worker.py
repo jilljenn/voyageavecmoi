@@ -7,7 +7,11 @@ import rethinkdb as r
 MAX_TRIES = 3 # Number of times we try to get a tweet before giving up
 
 def isTransportOffer(tweet):
-    return '#VoyageAvecMoi' in tweet['text']
+    hashtags = {x['text'] for x in tweet.get('entities', {}).get('hashtags', [])}
+    return 'VoyageAvecMoi' in hashtags
+
+def isRetweet(tweet):
+    return 'retweeted_status' in tweet
 
 def get_tweet_data(tweet):
     return {
@@ -30,7 +34,11 @@ class Logger:
 def fetch_tweets(db, stream):
     for tweet in stream.statuses.filter(track='#VoyageAvecMoi'):
         print ('Got tweet.')
-        if isTransportOffer(tweet):
+        if isRetweet(tweet):
+            print('Is a retweet.')
+        elif not isTransportOffer(tweet):
+            print('Not a transport offer.')
+        else:
             print ('Adding tweet from @{}'.format(tweet['user']['screen_name']))
             tweet_data = get_tweet_data(tweet)
             r.db('voyageavecmoi').table('offers').insert(tweet_data).run(db)
