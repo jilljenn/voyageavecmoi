@@ -7,7 +7,7 @@ def bulk_create_db(db_names):
         print ('BDD `{}` créée.'.format(db_name))
     print ('Toutes les base de données ont été crées.')
 
-def bulk_create_tables(db_name, tables_names):
+def bulk_create_tables(db_name, table_names):
     c = r.connect("localhost", 28015, db=db_name)
     for table in table_names:
         r.table_create(table).run(c)
