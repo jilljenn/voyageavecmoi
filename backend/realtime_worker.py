@@ -21,7 +21,12 @@ def get_tweet_data(tweet):
         'confirmedAsOffer': False
     }
 
-@retry(delay=1, backoff=2)
+class Logger:
+    def warning(self, fmt, error, delay):
+        print('Error: %r' % error)
+        print('Retrying in %s seconds.' % delay)
+
+@retry(delay=1, backoff=2, logger=Logger())
 def fetch_tweets(db, stream):
     for tweet in stream.statuses.filter(track='#VoyageAvecMoi'):
         print ('Got tweet.')
