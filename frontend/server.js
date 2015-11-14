@@ -14,7 +14,7 @@ app.use(express.static(publicPath));
 // We proxyfie all API requests under the /api route
 app.all('/api/*', function(req, res) {
     proxy.web(req, res, {
-        target: 'http://localhost:5000'
+        target: 'http://localhost:8000'
     });
 });
 
