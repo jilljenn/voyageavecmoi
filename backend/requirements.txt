@@ -1,3 +1,4 @@
+retry
 twitter
 rethinkdb
 falcon
