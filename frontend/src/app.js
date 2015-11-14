@@ -11,8 +11,15 @@ function runApplication() {
     <Provider store={Store}>
       <section>
         {Routes}
-        <DebugPanel top right bottom>
-          <DevTools store={Store} monitor={LogMonitor} />
+        <DebugPanel
+          top
+          right
+          bottom
+        >
+          <DevTools
+            store={Store}
+            monitor={LogMonitor}
+          />
         </DebugPanel>
       </section>
     </Provider>, document.getElementById('application'));
