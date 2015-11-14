@@ -1,23 +1,33 @@
 import React from 'react';
 
+import OfferList from 'components/OfferList.react';
+
 import {connect} from 'react-redux';
+import {fetchOffers} from 'actions/OffersActions';
 
-import {voteIncorrect, fetchOffers} from 'actions/OffersActions';
-
-@connect(state => {
+function mapStateToProps(state) {
   return {
     offers: state.offers.items,
     isLoading: state.offers.isFetching
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetch: () => dispatch(fetchOffers())
   }
-})
-export default class Home extends React.Component {
+}
+
+class Home extends React.Component {
   static propTypes = {
     offers: React.PropTypes.array.isRequired,
-    isLoading: React.PropTypes.bool.isRequired
+    dispatch: React.PropTypes.func.isRequired,
+    isLoading: React.PropTypes.bool.isRequired,
+    fetch: React.PropTypes.func.isRequired
   }
 
-  componentDidMount() {
-    this.props.dispatch(fetchOffers());
+  componentWillMount() {
+    this.props.fetch();
   }
 
   render() {
@@ -27,10 +37,11 @@ export default class Home extends React.Component {
       <article>
         <h1>Listes des offres de transport:</h1>
         <OfferList
-          onIncorrectVoted={id => dispatch(voteIncorrect(id))}
           offers={offers}
         />
       </article>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
