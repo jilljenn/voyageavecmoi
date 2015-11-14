@@ -61,6 +61,7 @@
   "dependencies": {
     "axios": "^0.7.0",
     "lodash": "^3.10.1",
+    "moment": "^2.10.6",
     "react": "^0.14",
     "react-dom": "^0.14.2",
     "react-redux": "^4.0.0",
