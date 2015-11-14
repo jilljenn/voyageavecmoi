@@ -45,7 +45,7 @@ function shouldFetchOffers(state) {
 
 export function fetchOffersIfNeeded() {
   return (dispatch, getState) => {
-    if (shouldFetchOffers(getState()) {
+    if (shouldFetchOffers(getState())) {
       return dispatch(fetchOffers());
     } else {
       return Promise.resolve();
