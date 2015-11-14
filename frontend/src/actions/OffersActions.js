@@ -32,6 +32,14 @@ export function fetchOffers() {
   }
 }
 
+export const FILTER_OFFER = 'FILTER_OFFER';
+export function filterOffer(text) {
+  return {
+    type: FILTER_OFFER,
+    text
+  }
+}
+
 function shouldFetchOffers(state) {
   const offers = state.offers;
   if (!offers) {

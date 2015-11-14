@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Card, Button} from 'belle';
+
 export default class Offer extends React.Component {
   static propTypes = {
     offer: React.PropTypes.object.isRequired
@@ -7,10 +9,10 @@ export default class Offer extends React.Component {
 
   render() {
     return (
-      <section>
+      <Card>
         <p>{this.props.offer.text}</p>
-        <button>Incorrect?</button>
-      </section>
+        <Button>Incorrect?</Button>
+      </Card>
     );
   }
 }
