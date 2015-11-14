@@ -1,7 +1,10 @@
 import os
+from retry.api import retry_call
 from secret import CONSUMER_KEY, CONSUMER_SECRET
 import twitter
 import rethinkdb as r
+
+MAX_TRIES = 3 # Number of times we try to get a tweet before giving up
 
 def isTransportOffer(tweet):
     return '#VoyageAvecMoi' in tweet['text']
@@ -23,7 +26,8 @@ def fetch_tweets(db, stream):
         print ('Got tweet.')
         if isTransportOffer(tweet):
             print ('Adding tweet from @{}'.format(tweet['user']['screen_name']))
-            r.db('voyageavecmoi').table('offers').insert(get_tweet_data(tweet)).run(db)
+            tweet_data = retry_call(get_tweet_data, (tweet,), tries=MAX_TRIES)
+            r.db('voyageavecmoi').table('offers').insert(tweet_data).run(db)
 
 MY_TWITTER_CREDS = os.path.expanduser('~/.my_app_credentials')
 if not os.path.exists(MY_TWITTER_CREDS):
