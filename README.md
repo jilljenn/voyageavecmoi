@@ -1,6 +1,14 @@
 # VoyageAvecMoi
 
-Cahier des charges : https://public.etherpad-mozilla.org/p/weYzt8Ui16
+Codons ensemble une application pour faciliter le traitement des tweets #VoyageAvecMoi, par exemple :
+
+- Reconnaissance d'une ville ou d'un trajet RER
+- Inscription à des alertes (ou couplage offre-demande)
+- Éventuellement, établir une spécification que Twitter pourrait implémenter !
+
+Cette liste n'est pas exhaustive, vous pouvez contribuer au cahier des charges ([accéder au pad](https://public.etherpad-mozilla.org/p/weYzt8Ui16)) !
+
+(C'est également l'occasion de comprendre comment diable fonctionne OAuth.)
 
 ## Comment participer
 
