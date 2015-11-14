@@ -13,7 +13,7 @@ def store_tweets(db, tweets):
                        'user_id': tweet['user']['id'],
                        'offer': False})
 
-MY_TWITTER_CREDS = os.path.expanduser('~/.my_app_credentials')
+MY_TWITTER_CREDS = os.path.expanduser('~/.voyageavecmoi_credentials')
 if not os.path.exists(MY_TWITTER_CREDS):
     twitter.oauth_dance("Voyage avec moi", CONSUMER_KEY, CONSUMER_SECRET,
                 MY_TWITTER_CREDS)
