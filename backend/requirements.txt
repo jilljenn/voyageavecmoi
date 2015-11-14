@@ -1,2 +1,4 @@
 twitter
-tinydb
+rethinkdb
+falcon
+gunicorn

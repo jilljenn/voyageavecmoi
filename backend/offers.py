@@ -1,25 +1,15 @@
 import falcon
 import json
-from tinydb import TinyDB, Query
-
-Tweets = Query()
+import rethinkdb as r
 
 class OfferListResource:
     def __init__(self):
-        self._db = TinyDB('tweets.json')
+        self._db = r.connect('localhost', 28015)
 
     def on_get(self, req, resp):
         """Returns all offers available"""
-        resp.body = json.dumps(self._db.search(Tweets.offer == True))
-
-class PendingListResource:
-    def __init__(self):
-        self._db = TinyDB('tweets.json')
-
-    def on_get(self, req, resp):
-        """Returns all pending tweets available"""
-        resp.body = json.dumps(self._db.search(Tweets.offer == False))
+        cursor = r.db('voyageavecmoi').table('offers').run(self._db)
+        resp.body = json.dumps(list(cursor))
 
 app = falcon.API()
-app.add_route('/offers', OfferListResource())
-app.add_route('/pending', PendingListResource())
+app.add_route('/api/offers', OfferListResource())
