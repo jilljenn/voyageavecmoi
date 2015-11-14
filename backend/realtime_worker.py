@@ -26,7 +26,7 @@ class Logger:
         print('Error: %r' % error)
         print('Retrying in %s seconds.' % delay)
 
-@retry(delay=1, backoff=2, logger=Logger())
+@retry(delay=5, logger=Logger())
 def fetch_tweets(db, stream):
     for tweet in stream.statuses.filter(track='#VoyageAvecMoi'):
         print ('Got tweet.')
