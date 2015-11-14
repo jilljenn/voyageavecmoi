@@ -46,7 +46,7 @@ Vous obtiendrez ainsi des identifiants CONSUMER_KEY et CONSUMER_SECRET à mettre
 Si vous obtenez un énorme JSON, c'est gagné ! Sinon, [signalez-nous](https://github.com/jilljenn/voyageavecmoi/issues) votre problème.
 
 #### API
-Ce projet se compose d'une API REST supporté par [Falcon](falconframework.org) qui va récupérer des données d'une base de donnée [RethinkDB](rethinkdb.com).
+Ce projet se compose d'une API REST supporté par [Falcon](http://falconframework.org) qui va récupérer des données d'une base de donnée [RethinkDB](https://rethinkdb.com).
 On a besoin d'aide pour créer plus d'endpoints et de rendre le code plus intéressant.
 
 *Technologies:* Python 3.5, Falcon (REST API), RethinkDB.
