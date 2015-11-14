@@ -13,6 +13,6 @@ trim_trailing_whitespace = true
 [*.{js,jsx,eslintrc,json}]
 indent_style = space
 indent_size = 2
-[*.html]
+[*.{html,css}]
 indent_style = space
 indent_size = 4
