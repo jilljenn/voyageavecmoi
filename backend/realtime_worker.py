@@ -25,7 +25,7 @@ def fetch_tweets(db, stream):
             print ('Adding tweet from @{}'.format(tweet['user']['screen_name']))
             r.db('voyageavecmoi').table('offers').insert(get_tweet_data(tweet)).run(db)
 
-MY_TWITTER_CREDS = os.path.expanduser('~/.my_app_credentials')
+MY_TWITTER_CREDS = os.path.expanduser('~/.voyageavecmoi_credentials')
 if not os.path.exists(MY_TWITTER_CREDS):
     twitter.oauth_dance("Voyage avec moi", CONSUMER_KEY, CONSUMER_SECRET,
                 MY_TWITTER_CREDS)
