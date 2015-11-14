@@ -1,5 +1,5 @@
 import os
-from retry.api import retry_call
+from retry.api import retry
 from secret import CONSUMER_KEY, CONSUMER_SECRET
 import twitter
 import rethinkdb as r
@@ -21,12 +21,13 @@ def get_tweet_data(tweet):
         'confirmedAsOffer': False
     }
 
+@retry(delay=1, backoff=2)
 def fetch_tweets(db, stream):
     for tweet in stream.statuses.filter(track='#VoyageAvecMoi'):
         print ('Got tweet.')
         if isTransportOffer(tweet):
             print ('Adding tweet from @{}'.format(tweet['user']['screen_name']))
-            tweet_data = retry_call(get_tweet_data, (tweet,), tries=MAX_TRIES)
+            tweet_data = get_tweet_data(tweet)
             r.db('voyageavecmoi').table('offers').insert(tweet_data).run(db)
 
 MY_TWITTER_CREDS = os.path.expanduser('~/.my_app_credentials')
