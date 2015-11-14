@@ -26,3 +26,5 @@ t = twitter.Twitter(auth=twitter.OAuth(
 db = TinyDB('tweets.json')
 
 store_tweets(db, t.search.tweets(q='#VoyageAvecMoi'))
+
+print('Derniers tweets #VoyageAvecMoi fructueusement ajoutés à tweets.json.')
