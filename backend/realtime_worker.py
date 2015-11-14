@@ -29,6 +29,7 @@ def fetch_tweets(db, stream):
             print ('Adding tweet from @{}'.format(tweet['user']['screen_name']))
             tweet_data = get_tweet_data(tweet)
             r.db('voyageavecmoi').table('offers').insert(tweet_data).run(db)
+            print('Done.')
 
 MY_TWITTER_CREDS = os.path.expanduser('~/.my_app_credentials')
 if not os.path.exists(MY_TWITTER_CREDS):
