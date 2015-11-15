@@ -4,6 +4,7 @@ import json
 import pprint
 import urllib
 import requests
+import itertools
 
 DATASET_DIR = 'dataset/'
 CITIES_FILE = 'dataset/cities.txt'
@@ -12,7 +13,7 @@ STATIONS_FILE = 'dataset/stations.json'
 class PageDoesNotExist(Exception):
     pass
 
-redirect_pattern = re.compile('#REDIRECTION [[(?P<target>.*)]]')
+redirect_pattern = re.compile(r'#REDIRECTION \[\[(?P<target>.*)\]\]')
 def wikipedia_query(name):
     title = urllib.parse.urlencode({'titles': name.replace(' ', '_')})
     data = requests.get('https://fr.wikipedia.org/w/api.php?action=query&prop=revisions&rvlimit=1&rvprop=content&format=json&{}'.format(title)).json()
@@ -20,9 +21,9 @@ def wikipedia_query(name):
     if 'revisions' not in page:
         raise PageDoesNotExist()
     content = ''.join(page['revisions'][0]['*'])
-    redirection = redirect_pattern.match(content)
-    if redirection:
-        return wikipedia_query(redirection.group('target'))
+    redirections = list(redirect_pattern.finditer(content))
+    if redirections:
+        return wikipedia_query(redirections[0].group('target'))
     return content
 
 if not os.path.isdir(DATASET_DIR):
@@ -42,8 +43,8 @@ else:
         fd.write('\n'.join(cities))
         fd.write('\n')
 
-section_title_pattern = re.compile(r'.*\b(?P<number>[A-Z]|[0-9]{1,2}( bis)?)\b.*')
-stations_template_pattern = re.compile(r'\{\{(?P<page>Métro de [^/]+/stations (?P<number>[A-Za-z0-9]+))\}\}')
+section_title_pattern = re.compile(r'.*\b(?P<number>[a-zA-Z]|[0-9]{1,2}( bis)?)\b.*')
+stations_template_pattern = re.compile(r'\{\{(?P<page>Métro de [^/]+/(stations|ligne) (?P<number>[A-Za-z0-9]+))\}\}')
 station_link_pattern = re.compile(r'\[\[(?P<name1>[^(\]]+) \(métro de [^|\]]+\)\|(?P<name2>[^\]]+)\]\]')
 def get_station_links(content):
     links = station_link_pattern.finditer(content)
@@ -55,16 +56,27 @@ else:
     print('Liste des stations non trouvée ; téléchargement.')
     stations = {}
     for city in cities[0:15]: # Check only for the 15 biggest ones
+        print(city)
         # Fetch the content of the main page
         try:
             content = wikipedia_query('Liste des stations du métro de {}'.format(city))
         except PageDoesNotExist:
             continue
 
-        sections = content.split('\n== ')[1:]
+        sections = content.split('\n==')[1:]
+        sections = [x.strip().split('\n===') for x in sections]
+        sections = list(itertools.chain.from_iterable(sections))
         city_stations = {}
         for section in sections:
-            (title, content) = section.split(' ==\n')
+            try:
+                (title, content) = section.split('==\n')
+            except ValueError:
+                try:
+                    (title, content) = section.split('===\n')
+                except ValueError:
+                    continue
+            title = title.strip()
+            content = content.strip()
             r = section_title_pattern.match(title)
             if not r:
                 continue
@@ -82,7 +94,6 @@ else:
                 link_names = get_station_links(content)
             else:
                 link_names = get_station_links(content)
-            print('{}: {}'.format(line, link_names))
             city_stations[line] = link_names
         stations[city] = city_stations
     with open(STATIONS_FILE, 'a') as fd:
