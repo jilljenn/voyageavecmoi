@@ -6,7 +6,7 @@ import {Card} from 'belle';
 @Radium
 export default class Profile extends React.Component {
   static propTypes = {
-    children: React.PropTypes.array.isRequired,
+    children: React.PropTypes.any.isRequired,
     title: React.PropTypes.string.isRequired,
     twitterHandle: React.PropTypes.string.isRequired
   }
