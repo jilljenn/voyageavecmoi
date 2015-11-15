@@ -11,17 +11,28 @@ export default class Offer extends React.Component {
   }
 
   render() {
+    const {offer} = this.props;
     return (
       <Card>
-        <p style={styles.text}>{this.props.offer.text}</p>
-        <Button primary>Prendre contact?</Button>
+        <section style={styles.card}>
+          <h1 style={styles.screenName}>{offer.user.name} (@{offer.user.screen_name})</h1>
+          <p style={styles.text}>{offer.text}</p>
+          <Button primary>Prendre contact?</Button>
+        </section>
       </Card>
     );
   }
 }
 
 const styles = {
+  card: {
+    display: 'flex',
+    flexFlow: 'column wrap'
+  },
   text: {
     maxWidth: '500px'
+  },
+  screenName: {
+    textAlign: 'right'
   }
 }
