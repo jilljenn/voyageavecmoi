@@ -18,6 +18,9 @@ class Transportations(Enum):
     bus = 2
     metro = 3
     tramway = 4
+    @staticmethod
+    def from_friendly_name(name):
+        return transportation_friendly_names[name.lower()]
 T = Transportations
 
 transportation_friendly_names = {
@@ -27,11 +30,12 @@ transportation_friendly_names = {
         'metro': T.metro,
         'tramway': T.tramway,
         'tram': T.tramway,
+        'ligne': None,
         }
 
 line_template = '(\s*(ligne)?\s*(?P<line>[0-9]{0,3}[a-z]{0,2}))'
 
-transportation_regexp = r'\b((?P<type>{}){})\b'.format(
+transportation_regexp = r'\b(?P<type>{}){}\b'.format(
         '|'.join(transportation_friendly_names),
         line_template)
 
@@ -50,10 +54,12 @@ def analyze(text):
     (['Paris'], [Transportation(type=<Transportations.RER: 1>, line='B')])
     >>> analyze('Paris REr ligne B')
     (['Paris'], [Transportation(type=<Transportations.RER: 1>, line='B')])
+    >>> analyze('Lyon ligne B')
+    (['Lyon'], [Transportation(type=None, line='B')])
     """
     cities = city_matcher.findall(text)
     transportations = transportation_matcher.finditer(text)
-    transportations = [Transportation(type=transportation_friendly_names[x.group('type').lower()],
+    transportations = [Transportation(type=T.from_friendly_name(x.group('type')),
                                       line=x.group('line').upper())
                        for x in transportations]
     return (cities, transportations)
