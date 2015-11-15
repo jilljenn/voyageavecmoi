@@ -55,7 +55,23 @@ class OfferListByCityResource:
 
         resp.body = json.dumps(list(cursor))
 
+class CitiesResource:
+
+    def __init__(self):
+        self._db = r.connect('localhost', 28015)
+
+    def on_get(self, req, resp):
+        """Returns all cities available"""
+        cursor = r.db("voyageavecmoi").table("offers")\
+            .filter({'confirmedAsOffer': True})\
+            .concat_map(lambda offer: offer['cities'])\
+            .distinct()\
+            .run(self._db)
+
+        resp.body = json.dumps(list(cursor))
+
 
 app = falcon.API()
 app.add_route('/api/offers', OfferListResource())
 app.add_route('/api/offers/{city_name}', OfferListByCityResource())
+app.add_route('/api/cities', CitiesResource())
