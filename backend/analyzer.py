@@ -2,13 +2,12 @@
 
 import re
 import pprint
-import urllib
 import collections
 from enum import Enum
 
 import collect_dataset
 
-city_matcher = re.compile(r'\b{}\b'.format('|'.join(collect_dataset.cities)))
+city_matcher = re.compile(r'\b{}\b'.format('|'.join(collect_dataset.cities)), re.I)
 
 
 class Transportations(Enum):
