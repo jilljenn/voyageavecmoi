@@ -74,7 +74,7 @@ class Home extends React.Component {
             offers={offers}
             currentFilter={currentFilter}
             onLoadMore={() => this.props.fetchMore(offers.length)}
-            isLoading={isLoading}
+            isInfiniteLoading={isLoading}
           />
         </section>
       </article>
