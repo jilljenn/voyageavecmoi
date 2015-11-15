@@ -6,13 +6,8 @@
             "user_geo_enabled": false,
             "user_location": "http://i.imgur.com/hpwgMsv.jpg"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -21,13 +16,8 @@
             "user_geo_enabled": true,
             "user_location": "Rennes / Istanbul"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -36,13 +26,8 @@
             "user_geo_enabled": false,
             "user_location": "Lyon city"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -51,13 +36,8 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -66,13 +46,8 @@
             "user_geo_enabled": false,
             "user_location": "Paris, Ile-de-France"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -81,13 +56,8 @@
             "user_geo_enabled": true,
             "user_location": "Bristol... or on my bike"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -96,13 +66,8 @@
             "user_geo_enabled": true,
             "user_location": "Continent C\u00e9tac\u00e9"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -111,13 +76,8 @@
             "user_geo_enabled": false,
             "user_location": "dans le radiateur "
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -126,13 +86,8 @@
             "user_geo_enabled": true,
             "user_location": "Strasbourg, France"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -141,13 +96,8 @@
             "user_geo_enabled": false,
             "user_location": "Paris - Nanterre"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -156,13 +106,24 @@
             "user_geo_enabled": true,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": "Lille",
+                "geolog": null,
+                "keywords": null,
+                "time": {
+                    "days": [
+                        "dimanche",
+                        "lundi",
+                        "mardi",
+                        "mercredi",
+                        "jeudi",
+                        "vendredi"
+                    ]
+                },
+                "transportations": null
+            }
+        ]
     },
     {
         "input": {
@@ -171,13 +132,8 @@
             "user_geo_enabled": false,
             "user_location": "France"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -186,13 +142,8 @@
             "user_geo_enabled": false,
             "user_location": "Ille-et-Vilaine, Bretagne"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -201,13 +152,15 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": null,
+                "geolog": null,
+                "keywords": null,
+                "time": null,
+                "transportations": null
+            }
+        ]
     },
     {
         "input": {
@@ -216,13 +169,15 @@
             "user_geo_enabled": true,
             "user_location": "Sous ton lit "
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": null,
+                "geolog": null,
+                "keywords": null,
+                "time": null,
+                "transportations": null
+            }
+        ]
     },
     {
         "input": {
@@ -231,13 +186,15 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": null,
+                "geolog": null,
+                "keywords": null,
+                "time": null,
+                "transportations": null
+            }
+        ]
     },
     {
         "input": {
@@ -246,13 +203,18 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": "Rennes",
+                "geolog": null,
+                "keywords": [
+                    "Fac",
+                    "Rennes1"
+                ],
+                "time": null,
+                "transportations": null
+            }
+        ]
     },
     {
         "input": {
@@ -294,13 +256,34 @@
             "user_geo_enabled": true,
             "user_location": "Paris, France"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": "Villejuif",
+                "geolog": null,
+                "keywords": null,
+                "time": null,
+                "transportations": [
+                    {
+                        "from": null,
+                        "line": "D",
+                        "to": null,
+                        "type": "RER"
+                    },
+                    {
+                        "from": null,
+                        "line": "C",
+                        "to": null,
+                        "type": "RER"
+                    },
+                    {
+                        "from": null,
+                        "line": "4",
+                        "to": null,
+                        "type": null
+                    }
+                ]
+            }
+        ]
     },
     {
         "input": {
@@ -309,13 +292,8 @@
             "user_geo_enabled": false,
             "user_location": "dans la comt\u00e9, \u00e0 cul-de-sac"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -324,13 +302,25 @@
             "user_geo_enabled": true,
             "user_location": "Loin l\u00e0 bas "
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": null,
+                "geolog": null,
+                "keywords": null,
+                "time": [
+                    "demain",
+                    "11h"
+                ],
+                "transportations": [
+                    {
+                        "from": "Versailles-RD",
+                        "line": "L",
+                        "to": "Paris Saint-Lazare",
+                        "type": null
+                    }
+                ]
+            }
+        ]
     },
     {
         "input": {
@@ -339,13 +329,30 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": null,
+                "geolog": null,
+                "keywords": null,
+                "time": [
+                    "lundi",
+                    "mardi",
+                    "mercredi",
+                    "jeudi",
+                    "vendredi",
+                    "samedi",
+                    "dimanche"
+                ],
+                "transportations": [
+                    {
+                        "from": null,
+                        "line": "12",
+                        "to": null,
+                        "type": null
+                    }
+                ]
+            }
+        ]
     },
     {
         "input": {
@@ -354,13 +361,8 @@
             "user_geo_enabled": true,
             "user_location": "Hogwarts"
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -369,13 +371,46 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": null,
+                "geolog": null,
+                "keywords": null,
+                "time": [
+                    "matin",
+                    "9h"
+                ],
+                "transportations": [
+                    {
+                        "from": "Lamarck",
+                        "line": "12",
+                        "to": "saint lazare",
+                        type": null
+                    }
+            },
+            {
+                "city": null,
+                "geolog": null,
+                "keywords": null,
+                "time": [
+                    "soir",
+                    "19h"
+                ],
+                "transportations": [
+                    {
+                        "from": "Lamarck",
+                        "line": "12",
+                        "to": "saint lazare",
+                        type": null
+                    },
+                    {
+                        "from": "saint lazare",
+                        "line": "12",
+                        "to": "Lamarck",
+                        type": null
+                    }
+            }
+        ]
     },
     {
         "input": {
@@ -384,13 +419,24 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+            {
+                "city": null,
+                "geolog": null,
+                "keywords": null,
+                "time": [
+                    "mardi",
+                    "mercredi",
+                    "jeudi"
+                ],
+                "transportations": {
+                    "from": null,
+                    "line": "A",
+                    "to": "Paris",
+                    "type": "RER"
+                }
+            }
+        ]
     },
     {
         "input": {
@@ -399,13 +445,8 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -414,13 +455,8 @@
             "user_geo_enabled": true,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -429,13 +465,8 @@
             "user_geo_enabled": true,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -444,13 +475,8 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     },
     {
         "input": {
@@ -459,12 +485,7 @@
             "user_geo_enabled": false,
             "user_location": ""
         },
-        "output": {
-            "city": null,
-            "geoloc": null,
-            "should_store": null,
-            "time": null,
-            "transportations": null
-        }
+        "offers": [
+        ]
     }
 ]
