@@ -22,6 +22,9 @@ var config = {
     new Webpack.optimize.UglifyJsPlugin(),
     new Webpack.optimize.DedupePlugin(),
     new Webpack.optimize.OccurrenceOrderPlugin(),
+    new Webpack.DefinePlugin({
+      __DEV__: false
+    }),
     new ExtractTextPlugin('app.css')
 	],
 	resolve: {

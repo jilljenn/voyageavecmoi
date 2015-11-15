@@ -19,7 +19,10 @@ var config = {
     filename: 'bundle.js'
   },
 	plugins: [
-    new Webpack.HotModuleReplacementPlugin()
+    new Webpack.HotModuleReplacementPlugin(),
+    new Webpack.DefinePlugin({
+      __DEV__: true
+    })
 	],
 	resolve: {
 		root: mainModulesPath,
