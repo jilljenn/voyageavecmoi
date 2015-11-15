@@ -21,7 +21,7 @@ class OfferListResource:
             raise falcon.HTTPInvalidParam("Limit cannot be negative or null", "page")
         else:
             cursor = r.db('voyageavecmoi').table('offers').slice(page - 1).limit(limit).run(self._db)
-            count = r.db('voyageavecmoi').table('offers').count()
+            count = r.db('voyageavecmoi').table('offers').count().run(self._db)
             resp.body = json.dumps(list(cursor))
             resp.append_header('X-Max-Elements', count)
 
