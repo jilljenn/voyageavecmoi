@@ -83,7 +83,7 @@ On a besoin d'aide sur le design, l'UX de l'application ainsi que des nombreuses
 #### Backend
 Il serait absolument génial d'ajouter 2 élements:
 
-	* Un bot capable de répondre et d'intéragir avec les personnes sur Twitter.
+	* Un bot capable de répondre et d'intéragir avec les personnes sur Twitter. (Il y a déjà un squelette dans `backend/twitter_bot.py`.)
 	* Une API real-time avec des WebSockets ou WAMP.ws !
 
 #### Frontend
