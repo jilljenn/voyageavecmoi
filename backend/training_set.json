@@ -1,0 +1,470 @@
+[
+    {
+        "input": {
+            "place": null,
+            "text": "Je d\u00e9terre donc cet autre hashtag: #VoyageAvecMoi (ou #VAM) qui avait \u00e9t\u00e9 mit en place la derni\u00e8re fois. Pour indiquer aux personnes ayant &gt;",
+            "user_geo_enabled": false,
+            "user_location": "http://i.imgur.com/hpwgMsv.jpg"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "Pensez-y demain. LastRT #VAM #VoyageAvecMoi",
+            "user_geo_enabled": true,
+            "user_location": "Rennes / Istanbul"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "Putain on va devoir ressortir #VoyageAvecMoi #VAM",
+            "user_geo_enabled": false,
+            "user_location": "Lyon city"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "A d\u00e9terrer : #voyageavecmoi.",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi pour les personnes ayant peur de repr\u00e9sailles fachos (femmes voil\u00e9es...) dans les prochains jours pdt leurs trajets",
+            "user_geo_enabled": false,
+            "user_location": "Paris, Ile-de-France"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi is again being used for those worried about reprisals and who want travel partners in the coming days https://t.co/nnqLNvo5qc",
+            "user_geo_enabled": true,
+            "user_location": "Bristol... or on my bike"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "C'est encore les m\u00eames qui vont prendre.\n\nComme d'hab.\n\nDites, on ressort le #VoyageAvecMoi, hein ?",
+            "user_geo_enabled": true,
+            "user_location": "Continent C\u00e9tac\u00e9"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "Et d\u00e8s demain, #VoyageAvecMoi n'h\u00e9site pas.",
+            "user_geo_enabled": false,
+            "user_location": "dans le radiateur "
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "on rappelle du coup cette op\u00e9ration \u00e0 mettre en place d\u00e8s aujourd'hui : https://t.co/aTTITYuiza #VoyageAvecMoi https://t.co/qE1ltH5y4G",
+            "user_geo_enabled": true,
+            "user_location": "Strasbourg, France"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VAM On reste unis et on ne c\u00e8de pas \u00e0 la haine #VoyageAvecMoi We stay united !",
+            "user_geo_enabled": false,
+            "user_location": "Paris - Nanterre"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "Pour les gens de Lille je suis pas tr\u00e8s forte, pas tr\u00e8s grande donc pas trop rassurante mais j'y suis du dimanche au vendredi #VoyageAvecMoi",
+            "user_geo_enabled": true,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi, comme en janvier, pr les pers ayant peur d'\u00eatre victimes de repr\u00e9sailles fachos dans les prochains jours (femmes voil\u00e9es...)",
+            "user_geo_enabled": false,
+            "user_location": "France"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "RAPPEL : pour les prochaines semaines, remettez #VoyageAvecMoi en route ! Afin de prot\u00e9ger les personnes racis\u00e9es des violences.",
+            "user_geo_enabled": false,
+            "user_location": "Ille-et-Vilaine, Bretagne"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "retour de #VoyageAvecMoi dans les prochains jours les gens",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "Donc toi, si tu peux h\u00e9sites pas, partage, rencontre, aide, aime #VoyageAvecMoi",
+            "user_geo_enabled": true,
+            "user_location": "Sous ton lit "
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi... Ou comment transmettre du bonheur",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi j'aimerai telmnt que qqn partage mes 10min de marche pour la #Fac #DROIT #Rennes1 mais pas sur que \u00e7a int\u00e9resse gd nombre..",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": {
+                "attributes": {},
+                "bounding_box": {
+                    "coordinates": [
+                        [
+                            [
+                                6.542885,
+                                46.513916
+                            ],
+                            [
+                                6.584202,
+                                46.513916
+                            ],
+                            [
+                                6.584202,
+                                46.543502
+                            ],
+                            [
+                                6.542885,
+                                46.543502
+                            ]
+                        ]
+                    ],
+                    "type": "Polygon"
+                },
+                "contained_within": [],
+                "country": "Schweiz",
+                "country_code": "CH",
+                "full_name": "Ecublens (VD), Vaud",
+                "id": "15f3236338d3c2ed",
+                "name": "Ecublens (VD)",
+                "place_type": "city",
+                "url": "https://api.twitter.com/1.1/geo/id/15f3236338d3c2ed.json"
+            },
+            "text": "Les gens qui partent de Villejuif vers le KB je suis l\u00e0 matin et soir. Le terrorisme ne doit pas engendrer le racisme. #VoyageAvecMoi",
+            "user_geo_enabled": true,
+            "user_location": "Paris, France"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi et peu importe pourquoi, pas seulement a cause de la peur. (Ye r\u00e9p\u00e8te RER D, RER C, ligne 4) DM si tu veux.",
+            "user_geo_enabled": false,
+            "user_location": "dans la comt\u00e9, \u00e0 cul-de-sac"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi #VAM\ndemain \u00e0 partir de 11h sur la ligne L Versailles-RD - Paris Saint-Lazare.",
+            "user_geo_enabled": true,
+            "user_location": "Loin l\u00e0 bas "
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi si vous avez besoin, je prends la 12 quasi ts les jours. je ne pense pas servir \u00e0 grand chose mais je serais l\u00e0.",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "De m\u00eame #VoyageAvecMoi  https://t.co/EDUD37jJ0o",
+            "user_geo_enabled": true,
+            "user_location": "Hogwarts"
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi sur la 12, de Lamarck vers saint lazare puis l'oppos\u00e9, le matin \u00e0 9h, le soir \u00e0 19h. Je suis de mauvaise humeur le matin :)",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "Rer A direction Paris , mardi mercredi et vendredi #VoyageAvecMoi",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "https://t.co/yYBmdRMSfT.  #Traumurlaub #Traumurlaub #FRAGER #JeSuisDeRace #jesuisfrancia #VoyageAvecMoi #vivelafraternite #ViveLaFrance",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#porteouverte to help ppl get out of the streets &amp; #voyageavecmoi to help those afraid to travel alone due to their skin color/religion.",
+            "user_geo_enabled": true,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "@Allynette @Neozox @Fitzcairn_ je me suis fait traiter de r\u00e9cup\u00e9rateur parce que j'ai dit que #VoyageAvecMoi devait \u00eatre pour tout",
+            "user_geo_enabled": true,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "#VoyageAvecMoi",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    },
+    {
+        "input": {
+            "place": null,
+            "text": "Utilisez le hashtag #VoyageAvecMoi si vous ne voulez pas prendre des transports seul-e-s, par peur de repr\u00e9sailles racistes/islamophobes.",
+            "user_geo_enabled": false,
+            "user_location": ""
+        },
+        "output": {
+            "city": null,
+            "geoloc": null,
+            "should_store": null,
+            "time": null,
+            "transportations": null
+        }
+    }
+]
