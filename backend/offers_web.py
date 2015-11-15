@@ -2,7 +2,7 @@ import falcon
 import json
 import rethinkdb as r
 
-MAX_OFFERS = 100
+MAX_OFFERS = 70 # Sufficiently low to answer as fast as possible
 
 def get_offers(limit=MAX_OFFERS, page=1, show_all=False):
     q = r.db('voyageavecmoi').table('offers').slice(page - 1).limit(limit)\
