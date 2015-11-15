@@ -17,7 +17,7 @@ export default class Offer extends React.Component {
         <section style={styles.card}>
           <h1 style={styles.screenName}>{offer.user.name} (@{offer.user.screen_name})</h1>
           <p style={styles.text}>{offer.text}</p>
-          <Button primary>Prendre contact?</Button>
+          <a target="_blank" href={`https://twitter.com/@${offer.user.screen_name}/status/${offer.id}`}>Prendre contact?</a>
         </section>
       </Card>
     );
@@ -33,6 +33,7 @@ const styles = {
     maxWidth: '500px'
   },
   screenName: {
-    textAlign: 'right'
+    textAlign: 'right',
+    fontSize: '18px'
   }
 }
