@@ -30,7 +30,7 @@ def _on_tweet(tweet):
     response = respond(tweet['text'].split(' ', 1)[1])
     if not response:
         response = 'No response'
-    prefix = '@%s ' % tweet['user']['screen_name']
+    prefix = '@{} '.format(tweet['user']['screen_name'])
     twitter.statuses.update(status=prefix + response, in_reply_to_status_id=tweet['id'])
 
 def fetch_tweets(db, stream):
@@ -53,7 +53,7 @@ auth = twitter.OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)
 stream = twitter.TwitterStream(auth=auth, domain='userstream.twitter.com')
 twitter = twitter.Twitter(auth=auth)
 me = twitter.account.verify_credentials()
-print('Logged to Twitter as @%s' % me['screen_name'])
+print('Logged to Twitter as @{}'.format(me['screen_name']))
 try:
     db = r.connect('localhost', 28015)
 
