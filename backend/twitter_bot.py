@@ -35,7 +35,7 @@ def _on_tweet(tweet):
 
 def fetch_tweets(db, stream):
     s = stream.user(replies='all')
-    next(s) # For some reason, the stream starts with a list of friends…
+    next(s) # https://dev.twitter.com/streaming/overview/messages-types#user_stream_messsages
     for tweet in s:
         on_tweet(tweet)
 
