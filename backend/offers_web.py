@@ -2,11 +2,12 @@ import falcon
 import json
 import rethinkdb as r
 
-MAX_OFFERS = 100
+MAX_OFFERS = 70 # Sufficiently low to answer as fast as possible
 
 def get_offers(limit=MAX_OFFERS, page=1, show_all=False):
-    q = r.db('voyageavecmoi').table('offers').slice(page - 1).limit(limit)
-    if show_all:
+    q = r.db('voyageavecmoi').table('offers').slice(page - 1).limit(limit)\
+        .order_by(r.desc('created_at'))
+    if not show_all:
         q = q.filter({'confirmedAsOffer': True})
 
     return q
@@ -55,7 +56,23 @@ class OfferListByCityResource:
 
         resp.body = json.dumps(list(cursor))
 
+class CitiesResource:
+
+    def __init__(self):
+        self._db = r.connect('localhost', 28015)
+
+    def on_get(self, req, resp):
+        """Returns all cities available"""
+        cursor = r.db("voyageavecmoi").table("offers")\
+            .filter({'confirmedAsOffer': True})\
+            .concat_map(lambda offer: offer['cities'])\
+            .distinct()\
+            .run(self._db)
+
+        resp.body = json.dumps(list(cursor))
+
 
 app = falcon.API()
 app.add_route('/api/offers', OfferListResource())
 app.add_route('/api/offers/{city_name}', OfferListByCityResource())
+app.add_route('/api/cities', CitiesResource())
