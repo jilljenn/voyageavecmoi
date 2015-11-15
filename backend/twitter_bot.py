@@ -30,8 +30,8 @@ def _on_tweet(tweet):
     response = respond(tweet['text'].split(' ', 1)[1])
     if not response:
         response = 'No response'
-    prefix = '@{} '.format(tweet['user']['screen_name'])
-    twitter.statuses.update(status=prefix + response, in_reply_to_status_id=tweet['id'])
+    response = '@{} {}'.format(tweet['user']['screen_name'], response)
+    twitter.statuses.update(status=response, in_reply_to_status_id=tweet['id'])
 
 def fetch_tweets(db, stream):
     s = stream.user(replies='all')
