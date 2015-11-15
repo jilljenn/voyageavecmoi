@@ -15,8 +15,7 @@ def respond(text):
 
 def isAddressedToMe(tweet):
     pprint.pprint(tweet)
-    me = twitter.account.verify_credentials()['screen_name']
-    return tweet['text'].lower().startswith('@' + me.lower())
+    return tweet['text'].lower().startswith('@' + me['screen_name'].lower())
 
 def on_tweet(tweet):
     try:
@@ -53,7 +52,8 @@ auth = twitter.OAuth(oauth_token, oauth_secret, CONSUMER_KEY, CONSUMER_SECRET)
 
 stream = twitter.TwitterStream(auth=auth, domain='userstream.twitter.com')
 twitter = twitter.Twitter(auth=auth)
-print('Logged to Twitter as @%s' % twitter.account.verify_credentials()['screen_name'])
+me = twitter.account.verify_credentials()
+print('Logged to Twitter as @%s' % me['screen_name'])
 try:
     db = r.connect('localhost', 28015)
 
