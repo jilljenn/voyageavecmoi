@@ -26,6 +26,7 @@ export default class Application extends React.Component {
 
 const styles = {
   main: {
-    display: 'flex'
+    display: 'flex',
+    flexFlow: 'column nowrap'
   }
 };
