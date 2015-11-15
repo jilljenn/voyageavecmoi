@@ -9,19 +9,27 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 function runApplication() {
   render(
     <Provider store={Store}>
-      <section>
-        {Routes}
-        <DebugPanel
-          top
-          right
-          bottom
-        >
-          <DevTools
-            store={Store}
-            monitor={LogMonitor}
-          />
-        </DebugPanel>
-      </section>
+    {(() => {
+      if (__DEV__) {
+        return (
+          <section>
+            {Routes}
+            <DebugPanel
+              top
+              right
+              bottom
+            >
+              <DevTools
+                store={Store}
+                monitor={LogMonitor}
+              />
+            </DebugPanel>
+          </section>
+        );
+      } else {
+        return Routes;
+      }
+    })()}
     </Provider>, document.getElementById('application'));
 }
 
