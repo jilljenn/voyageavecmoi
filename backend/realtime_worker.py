@@ -3,6 +3,7 @@ from retry.api import retry
 from secret import CONSUMER_KEY, CONSUMER_SECRET
 import twitter
 import rethinkdb as r
+import arrow
 
 MAX_TRIES = 3 # Number of times we try to get a tweet before giving up
 
@@ -22,6 +23,7 @@ def get_tweet_data(tweet):
             'name': tweet['user']['name'],
             'screen_name': tweet['user']['screen_name']
         },
+        'created_at': arrow.get(tweet['created_at'], 'MMM DD HH:mm:ss Z YYYY').to('utc').timestamp,
         'confirmedAsOffer': False
     }
 
