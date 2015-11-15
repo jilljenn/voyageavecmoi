@@ -42,8 +42,12 @@ else:
         fd.write('\n'.join(cities))
         fd.write('\n')
 
+section_title_pattern = re.compile(r'.*\b(?P<number>[A-Z]|[0-9]{1,2}( bis)?)\b.*')
 stations_template_pattern = re.compile(r'\{\{(?P<page>Métro de [^/]+/stations (?P<number>[A-Za-z0-9]+))\}\}')
 station_link_pattern = re.compile(r'\[\[(?P<name1>[^(\]]+) \(métro de [^|\]]+\)\|(?P<name2>[^\]]+)\]\]')
+def get_station_links(content):
+    links = station_link_pattern.finditer(content)
+    return [x.group('name2').split('<')[0].split(' - ')[0] for x in links]
 if os.path.isfile(STATIONS_FILE):
     with open(STATIONS_FILE) as fd:
         stations = json.load(fd)
@@ -57,17 +61,29 @@ else:
         except PageDoesNotExist:
             continue
 
-        # The page is made of templates which hold the content.
-        # Get the list of templates.
-        templates = stations_template_pattern.finditer(content)
+        sections = content.split('\n== ')[1:]
         city_stations = {}
-        for template in templates:
-            line_link = template.group('page')
-            # Get all station names in that template
-            content = wikipedia_query('Modèle:{}'.format(line_link))
-            links = station_link_pattern.finditer(content)
-            link_names = [x.group('name2').split('<')[0] for x in links]
-            city_stations[template.group('number')] = link_names
+        for section in sections:
+            (title, content) = section.split(' ==\n')
+            r = section_title_pattern.match(title)
+            if not r:
+                continue
+            line = r.group('number')
+
+            # The section may be made of a template which holds the content.
+            # Get the list of templates.
+            templates = list(stations_template_pattern.finditer(content))
+            if templates:
+                assert len(templates) == 1
+                template = templates[0]
+                line_link = template.group('page')
+                # Get all station names in that template
+                content = wikipedia_query('Modèle:{}'.format(line_link))
+                link_names = get_station_links(content)
+            else:
+                link_names = get_station_links(content)
+            print('{}: {}'.format(line, link_names))
+            city_stations[line] = link_names
         stations[city] = city_stations
     with open(STATIONS_FILE, 'a') as fd:
         json.dump(stations, fd, indent=4, sort_keys=True)
