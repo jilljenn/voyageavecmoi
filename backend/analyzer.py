@@ -62,6 +62,8 @@ def analyze(text):
     (['Lyon'], [Transportation(type=None, line='B'), Transportation(type=None, line='C')])
     >>> analyze('Paris ligne b bis')
     (['Paris'], [Transportation(type=None, line='B bis')])
+    >>> analyze('RER, ligne b')
+    ([], [Transportation(type=<Transportations.RER: 1>, line='B')])
     """
     cities = city_matcher.findall(text)
     tokens = [x.strip(',').strip(';').strip('.') for x in text.split()]
@@ -69,24 +71,33 @@ def analyze(text):
     expecting_line_number = False
     transportations = []
     skip_next = False
-    for (token, next_token) in zip(tokens, itertools.chain(tokens[1:], [None])):
+    tokens_with_lookahead = zip(tokens, itertools.chain(tokens[1:], [None]))
+    for (token, next_token) in tokens_with_lookahead:
         if skip_next:
+            # This is a 'bis', already handled as lookahead
             skip_next = False
             continue
         if token.lower() in transportation_friendly_names:
+            # This is a type of transportation
             type_ = T.from_friendly_name(token)
             expecting_line_number = True
         elif token in ('ligne', 'lignes'):
+            # Doesn't do anything if there was a transportation type just
+            # before, but may be used to declare a transportation
             expecting_line_number = True
         elif token in ('et', 'ou', ','):
+            # in a list, just ignore it
             pass
         elif expecting_line_number and line_number_pattern.match(token):
+            # This looks like a line number, and we are expecting a line
+            # number
             token = token.upper()
             if next_token and next_token.lower() == 'bis':
                 token += ' bis'
                 skip_next = True
             transportations.append(Transportation(type=type_, line=token))
         else:
+            # Just words. Reset the state.
             type_ = None
             expecting_line_number = False
 
