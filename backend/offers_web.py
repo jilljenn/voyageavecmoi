@@ -5,7 +5,8 @@ import rethinkdb as r
 MAX_OFFERS = 100
 
 def get_offers(limit=MAX_OFFERS, page=1, show_all=False):
-    q = r.db('voyageavecmoi').table('offers').slice(page - 1).limit(limit)
+    q = r.db('voyageavecmoi').table('offers').slice(page - 1).limit(limit)\
+        .order_by(r.desc('created_at'))
     if show_all:
         q = q.filter({'confirmedAsOffer': True})
 
