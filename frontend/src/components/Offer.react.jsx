@@ -1,5 +1,6 @@
 import React from 'react';
 
+import moment from 'moment';
 import {Card, Button} from 'belle';
 
 import Radium from 'radium';
@@ -16,7 +17,11 @@ export default class Offer extends React.Component {
       <Card>
         <section style={styles.card}>
           <h1 style={styles.screenName}>{offer.user.name} (@{offer.user.screen_name})</h1>
-          <p style={styles.text}>{offer.text}</p>
+          {offer.created_at && <h5 style={styles.createdAt}>{moment.unix(offer.created_at).fromNow()}</h5>}
+          <p
+            style={styles.text}
+            dangerouslySetInnerHTML={{__html: offer.text}}
+          />
           <a target="_blank" href={`https://twitter.com/@${offer.user.screen_name}/status/${offer.id}`}>Prendre contact?</a>
         </section>
       </Card>
@@ -35,5 +40,8 @@ const styles = {
   screenName: {
     textAlign: 'right',
     fontSize: '18px'
+  },
+  createdAt: {
+    textAlign: 'right'
   }
 }
