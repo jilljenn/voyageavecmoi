@@ -89,7 +89,7 @@ def normalize_conjunction(name):
     [['mairie'], ['mairie', 'issy'], ['mairie', 'd', 'issy']]
     """
     common_prefixes = {
-            'pont', 'rue', 'avenue', 'place', 'port', 'porte',
+            'pont', 'rue', 'avenue', 'place', 'port', 'porte', 'gare',
             }
     if name[0] in {'les', 'la', 'le'}:
         return normalize_conjunction(name[1:])
@@ -129,6 +129,8 @@ def normalize(name):
     ['mairie', 'mairie issy', 'mairie d issy']
     >>> normalize('Mairie d’Issy')
     ['mairie', 'mairie issy', 'mairie d issy']
+    >>> normalize('Gare d’Austerlitz')
+    ['austerlitz', 'gare austerlitz', 'gare d austerlitz']
     """
     name = accent_replacer(name.lower()).replace('-', ' ').split()
     name = list(itertools.chain.from_iterable(x.split('\'') for x in name))
@@ -192,6 +194,8 @@ def get_line_hints(tokens):
     [('Paris', '3 bis')]
     >>> get_line_hints(['foo', 'St', 'Fargeau', 'à', 'Lilas', 'bar'])
     [('Paris', '3 bis')]
+    >>> get_line_hints(['métro', 'Hoche', 'à', 'Austerlitz', 'foo'])
+    [('Paris', '5')]
     """
     line_hints = []
     for (i, token) in enumerate(tokens):
@@ -234,6 +238,8 @@ def analyze(text):
     (['Paris'], [Transportation(type=None, line='B bis')])
     >>> analyze('RER, ligne b')
     ([], [Transportation(type=<Transportations.RER: 1>, line='B')])
+    >>> analyze('métro, Hoche à Austerlitz')
+    (['Paris'], [Transportation(type=<Transportations.metro: 3>, line='5')])
     """
     tokens = [x.strip(',').strip(';').strip('.') for x in text.split()]
     cities_set = set(map(str.lower, collect_dataset.cities))
@@ -242,6 +248,15 @@ def analyze(text):
     expecting_line_number = False
     transportations = []
     skip_next = 0
+
+    line_hints = get_line_hints(tokens)
+
+    def reset_pending(): # just to avoid duplicating code
+        if not type_:
+            return
+        for hint in line_hints:
+            # /!\ overapproximation
+            transportations.append(Transportation(type=type_, line=hint[1]))
     for (i, token) in enumerate(tokens):
         if skip_next:
             skip_next -= 1
@@ -267,8 +282,19 @@ def analyze(text):
             transportations.append(Transportation(type=type_, line=token))
         else:
             # Just words. Reset the state.
+            if expecting_line_number:
+                reset_pending()
             type_ = None
             expecting_line_number = False
+    if expecting_line_number:
+        reset_pending()
+
+    if not cities:
+        cities = [x[0] for x in line_hints]
+    if not transportations:
+        transportations = [Transportation(type=type_, line=x[1])
+                           for x in line_hints
+                           if x[0] in cities]
 
     return (cities, transportations)
 
