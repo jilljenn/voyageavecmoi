@@ -8,12 +8,6 @@ from enum import Enum
 
 import collect_dataset
 
-city_matcher = re.compile(r'\b{}\b'.format('|'.join(collect_dataset.cities)), re.I)
-
-class ParseError(Exception):
-    pass
-
-
 class Transportations(Enum):
     RER = 1
     bus = 2
@@ -65,8 +59,9 @@ def analyze(text):
     >>> analyze('RER, ligne b')
     ([], [Transportation(type=<Transportations.RER: 1>, line='B')])
     """
-    cities = city_matcher.findall(text)
     tokens = [x.strip(',').strip(';').strip('.') for x in text.split()]
+    cities_set = set(map(str.lower, collect_dataset.cities))
+    cities = [token for token in tokens if token.lower() in cities_set]
     type_ = None
     expecting_line_number = False
     transportations = []
