@@ -16,7 +16,8 @@ function mapStateToProps(state) {
     cities: state.cities.items,
     isLoading: state.offers.isFetching || state.cities.isFetching,
     currentCity: state.offers.currentCity,
-    currentFilter: state.offers.currentFilter
+    currentFilter: state.offers.currentFilter,
+    error: state.error
   };
 }
 
@@ -41,9 +42,10 @@ class Home extends React.Component {
     filter: React.PropTypes.func.isRequired,
     offers: React.PropTypes.array.isRequired,
     cities: React.PropTypes.array.isRequired,
+    error: React.PropTypes.object.isRequired,
     isLoading: React.PropTypes.bool,
     currentCity: React.PropTypes.string,
-    currentFilter: React.PropTypes.string
+    currentFilter: React.PropTypes.string,
   }
 
   componentWillMount() {
@@ -52,7 +54,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const {dispatch, offers, cities,
+    const {dispatch, offers, cities, error,
       currentFilter, currentCity, isLoading} = this.props;
 
     return (
@@ -61,6 +63,14 @@ class Home extends React.Component {
         {isLoading &&
           <section style={styles.loader.section}>
             <Halogen.GridLoader color={styles.loader.color} />
+          </section>
+        }
+        {error.failed &&
+          <section style={styles.error.section}>
+            <h2 style={styles.error.title}>
+              Une erreur est survenue: {error.message}
+              Essayez peut-être de recharger la page!
+            </h2>
           </section>
         }
         <section>
@@ -97,6 +107,15 @@ const styles = {
       margin: 'auto'
     },
     color: '#4DAF7C'
+  },
+  error: {
+    title: {
+      fontSize: '24px',
+      margin: 'auto'
+    },
+    section: {
+      display: 'flex'
+    }
   }
 };
 
