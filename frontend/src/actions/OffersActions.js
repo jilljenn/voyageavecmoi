@@ -1,6 +1,8 @@
 import moment from 'moment';
 import axios from 'axios';
 
+import {apiError} from 'actions/ErrorsActions';
+
 export const REQUEST_OFFERS = 'REQUEST_OFFERS';
 export function requestOffers() {
   return {
@@ -55,7 +57,8 @@ export function fetchOffers() {
   return (dispatch, getState) => {
     dispatch(requestOffers());
     return axios.get('/api/offers')
-      .then(resp => dispatch(receiveOffers(resp.data)));
+      .then(resp => dispatch(receiveOffers(resp.data)))
+      .catch(err => dispatch(apiError(err)));
   }
 }
 
@@ -67,7 +70,8 @@ export function fetchOffersByCity(city) {
   return dispatch => {
     dispatch(requestOffersByCity(city));
     return axios.get(`/api/offers/${city}`)
-      .then(resp => dispatch(receiveOffers(resp.data)));
+      .then(resp => dispatch(receiveOffers(resp.data)))
+      .catch(err => dispatch(apiError(err)));
   }
 }
 
