@@ -1,5 +1,6 @@
 import falcon
 import json
+import functools
 import rethinkdb as r
 
 MAX_OFFERS = 70 # Sufficiently low to answer as fast as possible
@@ -12,33 +13,60 @@ def get_offers(limit=MAX_OFFERS, page=1, show_all=False):
 
     return q
 
-def retrieve_paging_params(params, max_limit):
-    try:
-        limit, page = map(int, (params.get('limit', max_limit), params.get('page', 1)))
-    except ValueError as e:
-        raise falcon.HTTPInvalidParam("Limit or page should be a number", "limit or page")
-    if page < 1:
-        raise falcon.HTTPInvalidParam("Page cannot be negative or null", "page")
-    elif limit < 1:
-        raise falcon.HTTPInvalidParam("Limit cannot be negative or null", "limit")
+def param(name, type_, default):
+    """Decorator for resource methods to parse and validate an argument."""
+    if type_ == 'bool':
+        def parser(req):
+            if name not in req.params:
+                return default
+            s = req.params.get[name]
+            if s.lower() == 'false':
+                return False
+            elif s.lower() == 'true':
+                return True
+            else:
+                raise falcon.HTTPInvalidParam(
+                        "{} should be a boolean".format(name),
+                        name)
+    elif type_ == 'positive int':
+        def parser(req):
+            if name not in req.params:
+                return default
+            try:
+                p = int(req.params[name])
+            except ValueError as e:
+                raise falcon.HTTPInvalidParam(
+                        "{} should be a number".format(name),
+                        name)
     else:
-        return (limit, page)
+        raise ArgumentError('Unknown type: {}'.format(type_))
+
+    def decorator(f):
+        @functools.wraps(f)
+        def newf(self, req, resp, *args, **kwargs):
+            kwargs[name] = parser(req)
+            return f(self, req, resp, *args, **kwargs)
+        return newf
+    return decorator
+
+def paged(max_limit):
+    """Decorator for parsing paging parameters."""
+    def decorator(f):
+        f = param('limit', 'positive int', MAX_OFFERS)(f)
+        f = param('page', 'positive int', 1)(f)
+        return f
+    return decorator
+
 
 class OfferListResource:
     def __init__(self):
         self._db = r.connect('localhost', 28015)
 
-    def on_get(self, req, resp):
+    @paged(MAX_OFFERS)
+    @param('show_all', 'bool', False)
+    def on_get(self, req, resp, limit, page, show_all):
         """Returns all offers available"""
-        limit, page = retrieve_paging_params(req.params, MAX_OFFERS)
 
-        show_all_str = req.params.get('show_all', 'false')
-        if show_all_str.lower() == 'false':
-            show_all = False
-        elif show_all_str.lower() == 'true':
-            show_all = True
-        else:
-            raise falcon.HTTPInvalidParam("show_all should be a boolean", "show_all")
 
         cursor = get_offers(limit, page, show_all).run(self._db)
         resp.body = json.dumps(list(cursor))
@@ -48,9 +76,9 @@ class OfferListByCityResource:
     def __init__(self):
         self._db = r.connect("localhost", 28015)
 
-    def on_get(self, req, resp, city_name):
+    @paged
+    def on_get(self, req, resp, city_name, limit, page):
         """Returns all offers available"""
-        limit, page = retrieve_paging_params(req.params, MAX_OFFERS)
 
         cursor = get_offers(limit, page)\
             .filter(lambda offer: offer['cities']\
