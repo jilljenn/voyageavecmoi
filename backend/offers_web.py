@@ -57,7 +57,7 @@ def param(name, type_, default):
 def paged(max_limit):
     """Decorator for parsing paging parameters."""
     def decorator(f):
-        f = param('limit', 'positive int', MAX_OFFERS)(f)
+        f = param('limit', 'positive int', max_limit)(f)
         f = param('page', 'positive int', 1)(f)
         return f
     return decorator
@@ -81,7 +81,7 @@ class OfferListByCityResource:
     def __init__(self):
         self._db = r.connect("localhost", 28015)
 
-    @paged
+    @paged(MAX_OFFERS)
     def on_get(self, req, resp, city_name, limit, page):
         """Returns all offers available"""
 
