@@ -32,9 +32,12 @@ class OfferListResource:
         """Returns all offers available"""
         limit, page = retrieve_paging_params(req.params, MAX_OFFERS)
 
-        try:
-            show_all = bool(req.params.get('show_all', False))
-        except ValueError as e:
+        show_all_str = req.params.get('show_all', 'false')
+        if show_all_str.lower() == 'false':
+            show_all = False
+        elif show_all_str.lower() == 'true':
+            show_all = True
+        else:
             raise falcon.HTTPInvalidParam("show_all should be a boolean", "show_all")
 
         cursor = get_offers(limit, page, show_all).run(self._db)
