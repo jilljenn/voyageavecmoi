@@ -184,7 +184,7 @@ def get_line_hints(tokens):
     """
     >>> get_line_hints(['foo', 'Belleville', 'à', 'Châtelet', 'bar'])
     [('Paris', '11')]
-    >>> get_line_hints(['foo', 'St Fargeau', 'à', 'Porte des Lilas', 'bar'])
+    >>> get_line_hints(['foo', 'St', 'Fargeau', 'à', 'Porte', 'des', 'Lilas', 'bar'])
     [('Paris', '3 bis')]
     """
     line_hints = []
