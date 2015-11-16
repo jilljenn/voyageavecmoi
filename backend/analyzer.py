@@ -240,6 +240,8 @@ def analyze(text):
     ([], [Transportation(type=<Transportations.RER: 1>, line='B')])
     >>> analyze('métro, Hoche à Austerlitz')
     (['Paris'], [Transportation(type=<Transportations.metro: 3>, line='5')])
+    >>> analyze('métro, St-Fargeau vers Lilas')
+    (['Paris'], [Transportation(type=<Transportations.metro: 3>, line='3 bis')])
     """
     tokens = [x.strip(',').strip(';').strip('.') for x in text.split()]
     cities_set = set(map(str.lower, collect_dataset.cities))
