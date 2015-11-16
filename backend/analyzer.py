@@ -87,7 +87,7 @@ def normalize_conjunction(name):
     [['mairie'], ['mairie', 'issy'], ['mairie', 'd', 'issy']]
     """
     common_prefixes = {
-            'pont', 'rue', 'avenue', 'place', 'port',
+            'pont', 'rue', 'avenue', 'place', 'port', 'porte',
             }
     if name[0] in {'les', 'la', 'le'}:
         return normalize_conjunction(name[1:])
@@ -184,6 +184,8 @@ def get_line_hints(tokens):
     """
     >>> get_line_hints(['foo', 'Belleville', 'à', 'Châtelet', 'bar'])
     [('Paris', '11')]
+    >>> get_line_hints(['foo', 'St Fargeau', 'à', 'Porte des Lilas', 'bar'])
+    [('Paris', '3 bis')]
     """
     line_hints = []
     for (i, token) in enumerate(tokens):
