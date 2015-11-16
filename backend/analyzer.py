@@ -79,6 +79,8 @@ def normalize_conjunction(name):
     [['ens'], ['ens', 'lyon'], ['ens', 'de', 'lyon']]
     >>> normalize_conjunction(['pont', 'de', 'levallois'])
     [['levallois'], ['pont', 'levallois'], ['pont', 'de', 'levallois']]
+    >>> normalize_conjunction(['porte', 'des', 'lilas'])
+    [['lilas'], ['porte', 'lilas'], ['porte', 'des', 'lilas']]
     >>> normalize_conjunction(['port', 'de', 'lille'])
     [['port'], ['port', 'lille'], ['port', 'de', 'lille']]
     >>> normalize_conjunction(['les', 'agnettes'])
@@ -93,14 +95,14 @@ def normalize_conjunction(name):
         return normalize_conjunction(name[1:])
     elif name == ['charles', 'de', 'gaulle']:
         return [['de', 'gaulle'], ['charles', 'de', 'gaulle']]
-    elif len(name) > 2 and name[0] in common_prefixes and name[1] in ('de', 'd'):
+    elif len(name) > 2 and name[0] in common_prefixes and name[1] in ('de', 'd', 'des'):
         L = [name[2:], [name[0]] + name[2:], name]
         if len(name) == 3 and name[-1] in map(str.lower, collect_dataset.cities):
             L[0] = [name[0]]
         return L
     elif 'de' in name or 'd' in name:
-        return [shortcuts.remove_after(name, ('de', 'd')),
-                shortcuts.remove(name, ('de', 'd')),
+        return [shortcuts.remove_after(name, ('de', 'd', 'des')),
+                shortcuts.remove(name, ('de', 'd', 'des')),
                 name]
     else:
         return [name]
@@ -117,6 +119,8 @@ def normalize(name):
     ['philibert', 'st philibert']
     >>> normalize('Pont de Levallois')
     ['levallois', 'pont levallois', 'pont de levallois']
+    >>> normalize('Porte des Lilas')
+    ['lilas', 'porte lilas', 'porte des lilas']
     >>> normalize('ENS de Lyon')
     ['ens', 'ens lyon', 'ens de lyon']
     >>> normalize('Père Lachaise')
@@ -185,6 +189,8 @@ def get_line_hints(tokens):
     >>> get_line_hints(['foo', 'Belleville', 'à', 'Châtelet', 'bar'])
     [('Paris', '11')]
     >>> get_line_hints(['foo', 'St', 'Fargeau', 'à', 'Porte', 'des', 'Lilas', 'bar'])
+    [('Paris', '3 bis')]
+    >>> get_line_hints(['foo', 'St', 'Fargeau', 'à', 'Lilas', 'bar'])
     [('Paris', '3 bis')]
     """
     line_hints = []
