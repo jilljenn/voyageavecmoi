@@ -5,10 +5,15 @@ import rethinkdb as r
 MAX_OFFERS = 70 # Sufficiently low to answer as fast as possible
 
 def get_offers(limit=MAX_OFFERS, page=1, show_all=False):
-    q = r.db('voyageavecmoi').table('offers').slice(page - 1).limit(limit)\
-        .order_by(r.desc('created_at'))
+    q = r.db('voyageavecmoi').table('offers')
+
     if not show_all:
         q = q.filter({'confirmedAsOffer': True})
+
+    q = q\
+        .order_by(r.desc('created_at'))\
+        .slice(page - 1)\
+        .limit(limit)
 
     return q
 
