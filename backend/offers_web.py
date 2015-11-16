@@ -15,14 +15,14 @@ def get_offers(limit=MAX_OFFERS, page=1, show_all=False):
 def retrieve_paging_params(params, max_limit):
     try:
         limit, page = map(int, (params.get('limit', max_limit), params.get('page', 1)))
-        if page < 1:
-            raise falcon.HTTPInvalidParam("Page cannot be negative or null", "page")
-        elif limit < 1:
-            raise falcon.HTTPInvalidParam("Limit cannot be negative or null", "limit")
-        else:
-            return (limit, page)
     except ValueError as e:
         raise falcon.HTTPInvalidParam("Limit or page should be a number", "limit or page")
+    if page < 1:
+        raise falcon.HTTPInvalidParam("Page cannot be negative or null", "page")
+    elif limit < 1:
+        raise falcon.HTTPInvalidParam("Limit cannot be negative or null", "limit")
+    else:
+        return (limit, page)
 
 class OfferListResource:
     def __init__(self):
