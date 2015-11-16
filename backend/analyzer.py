@@ -8,6 +8,13 @@ from enum import Enum
 
 import collect_dataset
 
+
+
+line_number_pattern = re.compile(r'^([0-9]{1,3}|[a-z]{1,2})$', re.I)
+
+################################################
+# Data structures
+
 class Transportations(Enum):
     RER = 1
     bus = 2
@@ -27,12 +34,12 @@ transportation_friendly_names = {
         'tram': T.tramway,
         }
 
-
-
-line_number_pattern = re.compile(r'^([0-9]{1,3}|[a-z]{1,2})$', re.I)
-
 Transportation = collections.namedtuple('Transportation', 'type line')
 
+
+
+################################################
+# Normalization
 
 class shortcuts:
     """namespace"""
@@ -51,14 +58,8 @@ class MultipleReplacer:
         self._matcher = re.compile('|'.join(dict_.keys()))
     def __call__(self, s):
         return self._matcher.sub(lambda m: self._dict[m.group(0)], s)
-accent_replacer = MultipleReplacer({'é': 'e', 'è': 'e', 'ê': 'e', 'à': 'a', 'ù': 'u'})
-
-def normalize_accents(name):
-    """
-    >>> normalize_accents(['père', 'lachaise'])
-    [['pere', 'lachaise']]
-    """
-    return [list(map(accent_replacer, name))]
+accent_replacer = MultipleReplacer({'é': 'e', 'è': 'e', 'ê': 'e', 'à': 'a', 'ù': 'u',
+    '—': '-', '–': '-'})
 
 def normalize_saint(name):
     """
@@ -78,14 +79,23 @@ def normalize_conjunction(name):
     [['ens'], ['ens', 'lyon'], ['ens', 'de', 'lyon']]
     >>> normalize_conjunction(['pont', 'de', 'levallois'])
     [['levallois'], ['pont', 'levallois'], ['pont', 'de', 'levallois']]
+    >>> normalize_conjunction(['port', 'de', 'lille'])
+    [['port'], ['port', 'lille'], ['port', 'de', 'lille']]
+    >>> normalize_conjunction(['les', 'agnettes'])
+    [['agnettes']]
     """
     common_prefixes = {
-            'pont', 'rue', 'avenue', 'place',
+            'pont', 'rue', 'avenue', 'place', 'port',
             }
-    if name == ['charles', 'de', 'gaulle']:
+    if name[0] in {'les', 'la', 'le'}:
+        return normalize_conjunction(name[1:])
+    elif name == ['charles', 'de', 'gaulle']:
         return [['de', 'gaulle'], ['charles', 'de', 'gaulle']]
     elif len(name) > 2 and name[0] in common_prefixes and name[1] == 'de':
-        return [name[2:], [name[0]] + name[2:], name]
+        L = [name[2:], [name[0]] + name[2:], name]
+        if len(name) == 3 and name[-1] in map(str.lower, collect_dataset.cities):
+            L[0] = [name[0]]
+        return L
     elif 'de' in name:
         return [shortcuts.remove_after(name, {'de'}),
                 shortcuts.remove(name, {'de'}),
@@ -110,11 +120,42 @@ def normalize(name):
     >>> normalize('Père Lachaise')
     ['pere lachaise']
     """
-    name = name.replace('-', ' ').lower().split()
+    name = accent_replacer(name.lower()).replace('-', ' ').split()
+    if not name:
+        return []
     names = [name]
-    for pred in (normalize_accents, normalize_saint, normalize_conjunction):
+    for pred in (normalize_saint, normalize_conjunction):
         names = itertools.chain.from_iterable(map(pred, names))
     return [' '.join(n) for n in names]
+
+
+##################################################
+# Find line a city from station_name
+
+station_to_line = {}
+
+for (city, lines) in collect_dataset.stations.items():
+    for (lineno, stations) in lines.items():
+        for station in stations:
+            station_normalizations = normalize(station)
+            for station_normalization in station_normalizations:
+                if station not in station_to_line:
+                    station_to_line[station_normalization] = []
+                station_to_line[station_normalization].append((city, lineno))
+
+def guess_line_from_station(station):
+    """
+    >>> guess_line_from_station("Agnettes")
+    [('Paris', '13')]
+    """
+    for normalization in reversed(normalize(station)):
+        # Find the closest one that matched
+        if normalization in station_to_line:
+            return station_to_line[normalization]
+
+
+##################################################
+# Analyzer
 
 def analyze(text):
     """Tries to find localization informations from a text.
