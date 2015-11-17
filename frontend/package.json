@@ -68,6 +68,7 @@
     "react": "^0.14",
     "react-addons-css-transition-group": "^0.14.2",
     "react-dom": "^0.14.2",
+    "react-github-fork-ribbon": "^0.4.2",
     "react-infinite": "^0.6.0",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
